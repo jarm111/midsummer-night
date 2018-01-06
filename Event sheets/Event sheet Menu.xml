@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet Menu</name>
+    <events>
+        <event-block sid="236305681776377">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="759490418138937" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Play" sid="885724687117166" type="Audio">
+                    <param id="0" name="Audio file">waves</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">-8</param>
+                    <param id="1" name="Tag (optional)">&quot;waves&quot;</param>
+                </action>
+                <action id="-15" name="Set visible" sid="546741313123084" type="Menu0">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="837873088365727" type="System">
+                    <param id="0" name="Seconds">5</param>
+                </action>
+                <action id="-15" name="Set visible" sid="113564304391752" type="Menu0">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="223517682186919" type="Menu1">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="431793197303253" type="System">
+                    <param id="0" name="Seconds">5</param>
+                </action>
+                <action id="-15" name="Set visible" sid="961100095826907" type="Menu1">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="248744404287071" type="Menu2">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="514755623853365" type="System">
+                    <param id="0" name="Seconds">5</param>
+                </action>
+                <action id="-15" name="Set visible" sid="802252553503899" type="Menu2">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="864802299331509" type="Menu3">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="161269006936324" type="System">
+                    <param id="0" name="Seconds">5</param>
+                </action>
+                <action id="-15" name="Set visible" sid="275246994544501" type="Menu3">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="6" name="Stop" sid="997529083981783" type="Audio">
+                    <param id="0" name="Tag">&quot;waves&quot;</param>
+                </action>
+                <action id="-2" name="Go to layout" sid="105109477582828" type="System">
+                    <param id="0" name="Layout">Game</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="316409758417934">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="773603648861247" type="Keyboard">
+                    <param id="0" name="Key">13 (Return)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="6" name="Stop" sid="823117489687641" type="Audio">
+                    <param id="0" name="Tag">&quot;waves&quot;</param>
+                </action>
+                <action id="-2" name="Go to layout" sid="341944106989119" type="System">
+                    <param id="0" name="Layout">Game</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

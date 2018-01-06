@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2project>
+    <name>Midsummer Night</name>
+    <description>survival-horror</description>
+    <version>1.3</version>
+    <author>Jarmo Syvälahti</author>
+    <author-email></author-email>
+    <author-website>http://</author-website>
+    <app-id>com.jarmo.midsummernight</app-id>
+    <unique-id>2jjilob6axra</unique-id>
+    <saved-with-version>24400</saved-with-version>
+    <used-plugins>
+        <plugin author="Scirra" id="Audio" version="1">Audio</plugin>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+    </used-plugins>
+    <used-behaviors>
+        <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
+        <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
+        <behavior author="Scirra" id="Flash" version="1">Flash</behavior>
+        <behavior author="Scirra" id="LOS" version="1">Line Of Sight</behavior>
+        <behavior author="Scirra" id="Pathfinding" version="1">Pathfinding</behavior>
+        <behavior author="Scirra" id="Timer" version="1">Timer</behavior>
+        <behavior author="Scirra" id="bound" version="1">Bound to layout</behavior>
+        <behavior author="Scirra" id="scrollto" version="1">Scroll To</behavior>
+        <behavior author="Scirra" id="solid" version="1">Solid</behavior>
+    </used-behaviors>
+    <used-effects />
+    <configurations>
+        <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
+    </configurations>
+    <window-size>
+        <width>100</width>
+        <height>100</height>
+    </window-size>
+    <pixel-rounding>0</pixel-rounding>
+    <preview-effects>1</preview-effects>
+    <first-layout>Menu</first-layout>
+    <use-loader-layout>0</use-loader-layout>
+    <configuration-settings>
+        <prop name="Clear background">Yes</prop>
+        <prop name="Downscaling">Medium quality</prop>
+        <prop name="Enable WebGL">On</prop>
+        <prop name="Fullscreen in browser">Letterbox integer scale</prop>
+        <prop name="Fullscreen scaling">High quality</prop>
+        <prop name="Loader style">Construct 2 splash</prop>
+        <prop name="Orientations">Any</prop>
+        <prop name="Pause on unfocus">Yes</prop>
+        <prop name="Physics engine">Box2D asm.js</prop>
+        <prop name="Preload sounds">Yes</prop>
+        <prop name="Preview browser">Chrome</prop>
+        <prop name="Sampling">Point</prop>
+        <prop name="Use high-DPI display">Yes</prop>
+    </configuration-settings>
+    <object-folder>
+        <object-type name="Player" sid="799890393568785">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="playerHealth" sid="438064068177319" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="8Direction" sid="312249971940528">
+                    <behavior id="EightDir" />
+                </behavior-type>
+                <behavior-type name="BoundToLayout" sid="429164857217056">
+                    <behavior id="bound" />
+                </behavior-type>
+                <behavior-type name="ScrollTo" sid="417709093491032">
+                    <behavior id="scrollto" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="standing" pingpong="0" repeatcount="1" repeatto="0" sid="503101921192575" speed="0">
+                    <frame duration="1" hotspotX="0.888889" hotspotY="0.363636">
+                        <collision-poly>
+                            <point x="0.111111" y="0.0909091" />
+                            <point x="0.888889" y="0.0909091" />
+                            <point x="0.888889" y="0.909091" />
+                            <point x="0.0902778" y="0.909091" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+                <animation framecount="2" loop="1" name="walking" pingpong="0" repeatcount="1" repeatto="0" sid="222395515013288" speed="3">
+                    <frame duration="1" hotspotX="0.888889" hotspotY="0.363636">
+                        <collision-poly>
+                            <point x="0.111111" y="0.0909091" />
+                            <point x="0.888889" y="0.0909091" />
+                            <point x="0.888889" y="0.909091" />
+                            <point x="0.0902778" y="0.909091" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.888889" hotspotY="0.363636">
+                        <collision-poly>
+                            <point x="0.111111" y="0.0909091" />
+                            <point x="0.888889" y="0.0909091" />
+                            <point x="0.888889" y="0.909091" />
+                            <point x="0.0902778" y="0.909091" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="MosqEnemy" sid="677936953934723">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="losCheck" sid="724061253858902" type="boolean" />
+                <instance-variable name="pathCheck" sid="783994787324808" type="boolean" />
+                <instance-variable name="mosqHealth" sid="720980317216013" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="LineOfSight" sid="331247886777590">
+                    <behavior id="LOS" />
+                </behavior-type>
+                <behavior-type name="Pathfinding" sid="121677988773007">
+                    <behavior id="Pathfinding" />
+                </behavior-type>
+                <behavior-type name="Flash" sid="106246796897262">
+                    <behavior id="Flash" />
+                </behavior-type>
+                <behavior-type name="Timer" sid="694837265448709">
+                    <behavior id="Timer" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="388549882908227" speed="5">
+                    <frame duration="1" hotspotX="0.466667" hotspotY="0.571429" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\mosquito.png">
+                        <collision-poly>
+                            <point x="0.0666667" y="0.0714286" />
+                            <point x="0.933333" y="0.0714286" />
+                            <point x="0.933333" y="0.928571" />
+                            <point x="0.0666667" y="0.928571" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Safehouse" sid="915884179479185">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Solid" sid="110458145070460">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="406918611816721" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\cottage.png">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.0625" y="0.9375" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Tree" sid="154070227561872">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Solid" sid="255902351305158">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="325846167302027" speed="0">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\birch.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\pruce.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Boat" sid="742510156964355">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Solid" sid="954316614844943">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="944825635674555" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\boat.png">
+                        <collision-poly>
+                            <point x="1" y="0" />
+                            <point x="1" y="1" />
+                            <point x="0" y="1" />
+                            <point x="0" y="0" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Water" sid="984642280079513">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Solid" sid="570908556288661">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="261417832800149" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.4375" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\water.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Stick" sid="442792701115100">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="889231088235631" speed="5">
+                    <frame duration="1" hotspotX="0.571429" hotspotY="0.933333" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\stick.png">
+                        <collision-poly>
+                            <point x="0.102679" y="0.51111" />
+                            <point x="0.357143" y="0.511805" />
+                            <point x="0.357143" y="0.0472222" />
+                            <point x="0.624999" y="0.0472223" />
+                            <point x="0.910714" y="0.574305" />
+                            <point x="0.51488" y="0.975" />
+                            <point x="0.107143" y="0.66875" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Keyboard" sid="899948473154736">
+            <plugin id="Keyboard" />
+        </object-type>
+        <object-type name="StickPickup" sid="171696236975808">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="992984604265268" speed="5">
+                    <frame duration="1" hotspotX="0.571429" hotspotY="0.933333" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\stick.png">
+                        <collision-poly>
+                            <point x="0.102679" y="0.51111" />
+                            <point x="0.357143" y="0.511805" />
+                            <point x="0.357143" y="0.0472222" />
+                            <point x="0.624999" y="0.0472223" />
+                            <point x="0.910714" y="0.574305" />
+                            <point x="0.51488" y="0.975" />
+                            <point x="0.107143" y="0.66875" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="FlyEnemy" sid="495760691278623">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="flyHealth" sid="587492967609139" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="Bullet" sid="678271770432834">
+                    <behavior id="Bullet" />
+                </behavior-type>
+                <behavior-type name="Timer" sid="899627258543640">
+                    <behavior id="Timer" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="783211495976320" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\fly.png">
+                        <collision-poly>
+                            <point x="0.0555556" y="0.0714286" />
+                            <point x="0.944444" y="0.0714286" />
+                            <point x="0.944444" y="0.928571" />
+                            <point x="0.0555556" y="0.928571" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Menu1" sid="932341057590787">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="513314976502148" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\menu1.png">
+                        <collision-poly>
+                            <point x="0.07" y="0.07" />
+                            <point x="0.5" y="0.37" />
+                            <point x="0.77" y="0.23" />
+                            <point x="0.56" y="0.5" />
+                            <point x="0.67" y="0.67" />
+                            <point x="0.5" y="0.7" />
+                            <point x="0.44" y="0.56" />
+                            <point x="0.06" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Menu2" sid="367748377549336">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="499968740736020" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\menu2.png">
+                        <collision-poly>
+                            <point x="0.09" y="0.09" />
+                            <point x="0.5" y="0.11" />
+                            <point x="0.75" y="0.25" />
+                            <point x="0.72" y="0.72" />
+                            <point x="0.5" y="0.86" />
+                            <point x="0.14" y="0.86" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Menu3" sid="908590111955500">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="270374787975802" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\menu3.png">
+                        <collision-poly>
+                            <point x="0.29" y="0.29" />
+                            <point x="0.5" y="0.5" />
+                            <point x="0.78" y="0.22" />
+                            <point x="0.88" y="0.5" />
+                            <point x="0.83" y="0.83" />
+                            <point x="0.5" y="0.55" />
+                            <point x="0.19" y="0.81" />
+                            <point x="0.08" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="GameOver" sid="707485547009840">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="292396021789127" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\gameover.png">
+                        <collision-poly>
+                            <point x="0.31" y="0.31" />
+                            <point x="0.5" y="0.55" />
+                            <point x="0.68" y="0.32" />
+                            <point x="0.73" y="0.73" />
+                            <point x="0.5" y="0.87" />
+                            <point x="0.3" y="0.7" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite" sid="830472884802140">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="595512079144321" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\ending.png">
+                        <collision-poly>
+                            <point x="0.29" y="0.29" />
+                            <point x="0.5" y="0.27" />
+                            <point x="0.74" y="0.26" />
+                            <point x="0.76" y="0.76" />
+                            <point x="0.5" y="0.92" />
+                            <point x="0.22" y="0.78" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Menu0" sid="748116719392816">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="695293659940374" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Devaus\Construct 2\Midsummer_Night\Sprites\menu0.png">
+                        <collision-poly>
+                            <point x="0.23" y="0.23" />
+                            <point x="0.76" y="0.24" />
+                            <point x="0.68" y="0.5" />
+                            <point x="0.83" y="0.83" />
+                            <point x="0.5" y="0.58" />
+                            <point x="0.48" y="0.52" />
+                            <point x="0.29" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Audio" sid="656105513912269">
+            <plugin id="Audio" />
+        </object-type>
+    </object-folder>
+    <families />
+    <layout-folder>
+        <layout>Menu.xml</layout>
+        <layout>Game.xml</layout>
+        <layout>TheEnd.xml</layout>
+    </layout-folder>
+    <event-folder>
+        <event-sheet>Event sheet Game.xml</event-sheet>
+        <event-sheet>Event sheet Menu.xml</event-sheet>
+        <event-sheet>Event sheet TheEnd.xml</event-sheet>
+    </event-folder>
+    <global-instances>
+        <global-instance type="Keyboard" uid="29" />
+        <global-instance type="Audio" uid="176">
+            <properties>
+                <timescale-audio>Off</timescale-audio>
+                <saveload>All</saveload>
+                <play-in-background>No</play-in-background>
+                <positioned-audio></positioned-audio>
+                <panning-model>HRTF</panning-model>
+                <distance-model>Inverse</distance-model>
+                <listener-z-height>50</listener-z-height>
+                <reference-distance>50</reference-distance>
+                <maximum-distance>300</maximum-distance>
+                <roll-off-factor>9</roll-off-factor>
+            </properties>
+        </global-instance>
+    </global-instances>
+    <sounds-folder>
+        <file name="fly.m4a" />
+        <file name="fly.ogg" />
+        <file name="grunt.m4a" />
+        <file name="grunt.ogg" />
+        <file name="mosquito.m4a" />
+        <file name="mosquito.ogg" />
+        <file name="pickup.m4a" />
+        <file name="pickup.ogg" />
+        <file name="swing1.m4a" />
+        <file name="swing1.ogg" />
+        <file name="swing2.m4a" />
+        <file name="swing2.ogg" />
+        <file name="swing3.m4a" />
+        <file name="swing3.ogg" />
+        <file name="squishfly1.m4a" />
+        <file name="squishfly1.ogg" />
+        <file name="squishfly2.m4a" />
+        <file name="squishfly2.ogg" />
+        <file name="squishmosq1.m4a" />
+        <file name="squishmosq1.ogg" />
+        <file name="squishmosq2.m4a" />
+        <file name="squishmosq2.ogg" />
+    </sounds-folder>
+    <music-folder>
+        <file name="fireplace.m4a" />
+        <file name="fireplace.ogg" />
+        <file name="waves.m4a" />
+        <file name="waves.ogg" />
+    </music-folder>
+    <files-folder>
+        <file-folder name="Icons">
+            <file name="icon-16.png" />
+            <file name="icon-32.png" />
+            <file name="icon-114.png" />
+            <file name="icon-128.png" />
+            <file name="icon-256.png" />
+            <file name="loading-logo.png" />
+        </file-folder>
+    </files-folder>
+</c2project>

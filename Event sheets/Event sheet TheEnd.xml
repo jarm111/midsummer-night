@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet TheEnd</name>
+    <events>
+        <event-block sid="430339146950083">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="628713079362804" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Play" sid="146101515908537" type="Audio">
+                    <param id="0" name="Audio file">fireplace</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">-6</param>
+                    <param id="1" name="Tag (optional)">&quot;fireplace&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="853037442929682">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="183495315932497" type="Keyboard">
+                    <param id="0" name="Key">13 (Return)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="6" name="Stop" sid="290957467736969" type="Audio">
+                    <param id="0" name="Tag">&quot;fireplace&quot;</param>
+                </action>
+                <action id="-2" name="Go to layout" sid="319630026992715" type="System">
+                    <param id="0" name="Layout">Menu</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

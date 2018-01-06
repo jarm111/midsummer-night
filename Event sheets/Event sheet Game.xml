@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Event sheet Game</name>
+    <events>
+        <variable constant="0" name="gameOver" sid="873770015558508" static="0" type="number">0</variable>
+        <variable constant="0" name="weaponArmed" sid="592620519683723" static="0" type="number">0</variable>
+        <variable constant="0" name="swingSound" sid="304963178706677" static="0" type="number">0</variable>
+        <variable constant="0" name="weaponSwing" sid="346455895250310" static="0" type="number">0</variable>
+        <event-group description="" sid="373747976913167" title="FlyEnemy">
+            <sub-events>
+                <comment>Sound</comment>
+                <event-block sid="671474716466135">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="300350524489652" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="counter" sid="391691464263265" static="0" type="number">0</variable>
+                        <event-block sid="301822256933924">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="883007979096404" type="System">
+                                    <param id="0" name="Object">FlyEnemy</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Timer" id="0" name="Start timer" sid="927756485102636" type="FlyEnemy">
+                                    <param id="0" name="Duration">0.3+counter</param>
+                                    <param id="1" name="Type">0</param>
+                                    <param id="2" name="Tag">&quot;playSoundTimer&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="606586407309435" type="System">
+                                    <param id="0" name="Variable">counter</param>
+                                    <param id="1" name="Value">0.3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="952980447830595">
+                    <conditions>
+                        <condition behavior="Timer" id="0" name="On timer" sid="104956706252872" type="FlyEnemy">
+                            <param id="0" name="Tag">&quot;playSoundTimer&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="25" name="Play at object" sid="879176922729360" type="Audio">
+                            <param id="0" name="Audio file">fly</param>
+                            <param id="1" name="Loop">1</param>
+                            <param id="2" name="Volume">-1</param>
+                            <param id="3" name="Object">FlyEnemy</param>
+                            <param id="4" name="Inner angle">360</param>
+                            <param id="5" name="Outer angle">360</param>
+                            <param id="6" name="Outer gain">0</param>
+                            <param id="7" name="Tag (optional)">str(FlyEnemy.UID)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Random bullet movement, new angle on collision with solid object.</comment>
+                <event-block sid="441989299772143">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="954738900429931" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="552586703323020" type="FlyEnemy">
+                            <param id="0" name="Angle">random(360)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Enemy hit/death</comment>
+                <event-block sid="464758466515418">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="519453199302193" type="Stick">
+                            <param id="0" name="Object">FlyEnemy</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Subtract from" sid="163186724573779" type="FlyEnemy">
+                            <param id="0" name="Instance variable">flyHealth</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="401397611577643">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="304679626603424" type="FlyEnemy">
+                            <param id="0" name="Instance variable">flyHealth</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="squishFlySound" sid="782782859776451" static="0" type="number">0</variable>
+                        <event-block sid="982166950136260">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Destroy" sid="466363488523722" type="FlyEnemy" />
+                                <action id="6" name="Stop" sid="831864937410790" type="Audio">
+                                    <param id="0" name="Tag">str(FlyEnemy.UID)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="121474582612331" type="System">
+                                    <param id="0" name="Variable">squishFlySound</param>
+                                    <param id="1" name="Value">int(random(1,3))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="151397602406781">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="793509312105521" type="System">
+                                    <param id="0" name="Variable">squishFlySound</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="257989661381416" type="Audio">
+                                    <param id="0" name="Audio file">squishfly1</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">-0</param>
+                                    <param id="1" name="Tag (optional)">&quot;squishfly1&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="427556724969629">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="582966495319260" type="System">
+                                    <param id="0" name="Variable">squishFlySound</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="301421195496648" type="Audio">
+                                    <param id="0" name="Audio file">squishfly2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">-0</param>
+                                    <param id="1" name="Tag (optional)">&quot;squishfly2&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="551358241739372" title="MosqEnemy">
+            <sub-events>
+                <comment>Sound</comment>
+                <event-block sid="376694880494002">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="217771052776136" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="counter" sid="430926363226435" static="0" type="number">0</variable>
+                        <event-block sid="409821383717271">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="289270503992187" type="System">
+                                    <param id="0" name="Object">MosqEnemy</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Timer" id="0" name="Start timer" sid="938728394506608" type="MosqEnemy">
+                                    <param id="0" name="Duration">0.2+counter</param>
+                                    <param id="1" name="Type">0</param>
+                                    <param id="2" name="Tag">&quot;playSoundTimer&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="214305007803628" type="System">
+                                    <param id="0" name="Variable">counter</param>
+                                    <param id="1" name="Value">0.2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="229835858782843">
+                    <conditions>
+                        <condition behavior="Timer" id="0" name="On timer" sid="664792897464604" type="MosqEnemy">
+                            <param id="0" name="Tag">&quot;playSoundTimer&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="25" name="Play at object" sid="149984810906359" type="Audio">
+                            <param id="0" name="Audio file">mosquito</param>
+                            <param id="1" name="Loop">1</param>
+                            <param id="2" name="Volume">-7</param>
+                            <param id="3" name="Object">MosqEnemy</param>
+                            <param id="4" name="Inner angle">360</param>
+                            <param id="5" name="Outer angle">360</param>
+                            <param id="6" name="Outer gain">0</param>
+                            <param id="7" name="Tag (optional)">str(MosqEnemy.UID)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Pathfinding: On line-of-sight to player, finds path to player. On arrival or failed to find path, check line of sight again.</comment>
+                <event-block sid="999366001975343">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="270855065456142" type="MosqEnemy">
+                            <param id="0" name="Instance variable">losCheck</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="131979875888929" type="MosqEnemy">
+                            <param id="0" name="Instance variable">pathCheck</param>
+                        </condition>
+                        <condition behavior="LineOfSight" id="0" name="Has LOS to object" sid="336383035096035" type="MosqEnemy">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="451683225673150" type="MosqEnemy">
+                            <param id="0" name="Instance variable">losCheck</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="582709699012221">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="681098366208746" type="MosqEnemy">
+                            <param id="0" name="Instance variable">losCheck</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="0" name="Find path" sid="829837099212529" type="MosqEnemy">
+                            <param id="0" name="X">Player.X</param>
+                            <param id="1" name="Y">Player.Y</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="211358217693730" type="MosqEnemy">
+                            <param id="0" name="Instance variable">losCheck</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="264978801902126" type="MosqEnemy">
+                            <param id="0" name="Instance variable">pathCheck</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="947234617874530">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="1" name="On failed to find path" sid="932766136804204" type="MosqEnemy" />
+                    </conditions>
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="340531420557202" type="MosqEnemy">
+                            <param id="0" name="Instance variable">pathCheck</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="157066696627477">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="0" name="On path found" sid="559767452806152" type="MosqEnemy" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="1" name="Move along path" sid="396699480987357" type="MosqEnemy" />
+                    </actions>
+                </event-block>
+                <event-block sid="815734464901375">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="5" name="On arrived" sid="281854347323254" type="MosqEnemy" />
+                    </conditions>
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="441420361166936" type="MosqEnemy">
+                            <param id="0" name="Instance variable">pathCheck</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Enemy hit/death</comment>
+                <event-block sid="326561377441930">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="369277203870166" type="Stick">
+                            <param id="0" name="Object">MosqEnemy</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Subtract from" sid="523480143682083" type="MosqEnemy">
+                            <param id="0" name="Instance variable">mosqHealth</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="219575551890360">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="354711070731702" type="MosqEnemy">
+                            <param id="0" name="Instance variable">mosqHealth</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="squishMosqSound" sid="271978361654290" static="0" type="number">0</variable>
+                        <event-block sid="858898829380186">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Destroy" sid="322781325086584" type="MosqEnemy" />
+                                <action id="6" name="Stop" sid="623431273037389" type="Audio">
+                                    <param id="0" name="Tag">str(MosqEnemy.UID)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="393904192442732" type="System">
+                                    <param id="0" name="Variable">squishMosqSound</param>
+                                    <param id="1" name="Value">int(random(1,3))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="801898618414148">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="839765214192299" type="System">
+                                    <param id="0" name="Variable">squishMosqSound</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="458209228331984" type="Audio">
+                                    <param id="0" name="Audio file">squishmosq1</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">1</param>
+                                    <param id="1" name="Tag (optional)">&quot;squishmosq1&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="483612505165187">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="867518373963867" type="System">
+                                    <param id="0" name="Variable">squishMosqSound</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="921463719788234" type="Audio">
+                                    <param id="0" name="Audio file">squishmosq2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">1</param>
+                                    <param id="1" name="Tag (optional)">&quot;squishmosq2&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="927640003607393" title="Weapon">
+            <sub-events>
+                <comment>Weapon swing animation and delay</comment>
+                <event-block sid="834243909977206">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="787363665859905" type="System">
+                            <param id="0" name="Variable">weaponSwing</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-1" name="Every tick" sid="585879697600050" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="911455771501930" type="Stick">
+                            <param id="0" name="Object">Player</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="656484549199381">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="331762548380637" type="Keyboard">
+                            <param id="0" name="Key">32 (VÄli)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="955187852835020" type="System">
+                            <param id="0" name="Variable">weaponArmed</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="191468887181418" type="System">
+                            <param id="0" name="Variable">weaponSwing</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="589175716696823" type="Stick" />
+                        <action id="-9" name="Set value" sid="312887289849089" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Value">int(random(1,4))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="502841319496885" type="System">
+                            <param id="0" name="Variable">weaponSwing</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="435054851637073" type="Player">
+                            <param id="0" name="Object">Stick</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">0</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="878875633100408" type="Stick">
+                            <param id="0" name="Angle">80</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="613288829607961" type="Stick">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="508394491320563" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="778097359386048" type="Stick">
+                            <param id="0" name="Angle">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="908634997266439" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="102713930049448" type="Stick">
+                            <param id="0" name="Angle">280</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="888729684713815" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="636496402090194" type="Stick" />
+                        <action id="-16" name="Wait" sid="753119215961888" type="System">
+                            <param id="0" name="Seconds">0.6</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="897802136622546" type="System">
+                            <param id="0" name="Variable">weaponSwing</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Randomized weapon swing sounds</comment>
+                <event-block sid="704563810749570">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="127967870339900" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="421980398500835" type="Audio">
+                            <param id="0" name="Audio file">swing1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-6</param>
+                            <param id="1" name="Tag (optional)">&quot;swing1&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="294777775389231" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="452997496048994">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="681652782265350" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="267782552234255" type="Audio">
+                            <param id="0" name="Audio file">swing2</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-6</param>
+                            <param id="1" name="Tag (optional)">&quot;swing2&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="631188705259902" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="102874436608316">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="916726836714393" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="663338373154099" type="Audio">
+                            <param id="0" name="Audio file">swing3</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-6</param>
+                            <param id="1" name="Tag (optional)">&quot;swing3&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="889478629322865" type="System">
+                            <param id="0" name="Variable">swingSound</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Weapon pickup</comment>
+                <event-block sid="715189053106197">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="149824084689160" type="Player">
+                            <param id="0" name="Object">StickPickup</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="638136539738720" type="Audio">
+                            <param id="0" name="Audio file">pickup</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-2</param>
+                            <param id="1" name="Tag (optional)">&quot;pickup&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="892846656524865" type="System">
+                            <param id="0" name="Variable">weaponArmed</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="855724067270564" type="StickPickup" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="296349097371560" title="Player">
+            <sub-events>
+                <comment>Set audio listener to player</comment>
+                <event-block sid="366434358892374">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="525866723173623" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="26" name="Set listener object" sid="890046598477101" type="Audio">
+                            <param id="0" name="Object">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Player hit/death</comment>
+                <event-block sid="781648677714002">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="153784463173491" type="MosqEnemy">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Subtract from" sid="165567598216419" type="Player">
+                            <param id="0" name="Instance variable">playerHealth</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="976514727047109">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="920523037051041" type="FlyEnemy">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Subtract from" sid="544290614036687" type="Player">
+                            <param id="0" name="Instance variable">playerHealth</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="102208486804911">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="822594342743887" type="Player">
+                            <param id="0" name="Instance variable">playerHealth</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="158080747716256" type="Audio">
+                            <param id="0" name="Audio file">grunt</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-6</param>
+                            <param id="1" name="Tag (optional)">&quot;grunt&quot;</param>
+                        </action>
+                        <action id="13" name="Add delay effect" sid="737759586101565" type="Audio">
+                            <param id="0" name="Tag">&quot;grunt&quot;</param>
+                            <param id="1" name="Delay">0.2</param>
+                            <param id="2" name="Gain">-10</param>
+                            <param id="3" name="Mix">40</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="785405251273187" type="Player" />
+                        <action id="-9" name="Set value" sid="866518387206656" type="System">
+                            <param id="0" name="Variable">gameOver</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Animation</comment>
+                <event-block sid="929502485132570">
+                    <conditions>
+                        <condition behavior="8Direction" id="0" name="Is moving" sid="428546528977148" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="312312531409191" type="Player">
+                            <param id="0" name="Animation">&quot;walking&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="852474212816043">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="230969366868595" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="460217701517355" type="Player">
+                            <param id="0" name="Animation">&quot;standing&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="217657654095509" title="World">
+            <sub-events>
+                <comment>Map end</comment>
+                <event-block sid="838770189935497">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="282836825222639" type="Player">
+                            <param id="0" name="Object">Safehouse</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="463153233415486" type="System">
+                            <param id="0" name="Layout">TheEnd</param>
+                        </action>
+                        <action id="-21" name="Reset global variables" sid="736183361318211" type="System" />
+                    </actions>
+                </event-block>
+                <comment>Map restart</comment>
+                <event-block sid="616573446269154">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="919005435734389" type="System">
+                            <param id="0" name="Variable">gameOver</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="816398735369513">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="505668132868617" type="Keyboard">
+                                    <param id="0" name="Key">13 (Return)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-26" name="Restart layout" sid="426912780250499" type="System" />
+                                <action id="-21" name="Reset global variables" sid="375360627537561" type="System" />
+                                <action id="12" name="Remove all effects" sid="226689797879711" type="Audio">
+                                    <param id="0" name="Tag">&quot;grunt&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Randomize weapon and safehouse location between two positions.</comment>
+                <event-block sid="584526408164189">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="894351472441934" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="355429233773242" type="Safehouse">
+                            <param id="0" name="X">choose(32,288)</param>
+                            <param id="1" name="Y">choose(16,32)</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="386548414768692" type="StickPickup">
+                            <param id="0" name="X">choose(256,16)</param>
+                            <param id="1" name="Y">choose(240,240)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="803834465269955" title="HUD">
+            <sub-events>
+                <comment>Game Over message</comment>
+                <event-block sid="579963925115511">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="329224940748075" type="System">
+                            <param id="0" name="Variable">gameOver</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="274343162801700" type="GameOver">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+    </events>
+</c2eventsheet>
